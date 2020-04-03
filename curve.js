@@ -68,36 +68,46 @@ class Vector {
 class LissaCurve {
     constructor() {
         this.path = [];
-        this.current = new Array;
+        this.current = new Vector();
     }
 
     setX(x) {
-        return this.current[0] = x;
+        return this.current.x = x;
     }
 
     setY(y) {
-        return this.current[1] = y;
+        return this.current.y = y;
     }
 
     addPoint() {
         this.path.push(this.current);
-        this.current = new Array;
+        this.current = new Vector();
+    }
+    
+    addColor() {
+        let r = Math.floor(Math.random()*(255 - 1) + 1);
+        let g = Math.floor(Math.random()*(255 - 1) + 1);
+        let b = Math.floor(Math.random()*(255 - 1) + 1);
+        this.current.colorArray(r,g,b);
     }
 
     drawCurve() {
         for (let i = 0; i < this.path.length; i++){
 
-            ctx.strokeStyle = 'rgb(255,255,255)';
+            ctx.strokeStyle = `
+            rgb(${this.path[i].r},
+                ${this.path[i].g},
+                ${this.path[i].b})`;
             ctx.lineWidth = 0.5;
             ctx.beginPath();
 
             try {
-                ctx.moveTo(this.path[i][0],this.path[i][1]);
-                ctx.lineTo(this.path[i-1][0],this.path[i-1][1]);
+                ctx.moveTo(this.path[i].x,this.path[i].y);
+                ctx.lineTo(this.path[i-1].x,this.path[i-1].y);
             }
             catch {
-                ctx.moveTo(this.path[i][0],this.path[i][1]);
-                ctx.lineTo(this.path[i][0],this.path[i][1]);
+                ctx.moveTo(this.path[i].x,this.path[i].y);
+                ctx.lineTo(this.path[i].x,this.path[i].y);
             }
 
             ctx.closePath();
