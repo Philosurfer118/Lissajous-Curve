@@ -1,1 +1,1 @@
-# Lissajous-CUrve
+# Lissajous-Curve
