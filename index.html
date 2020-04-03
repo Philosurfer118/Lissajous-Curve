@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Lissajous Table</title>
+
+
+  <script src="fraction.js"  type="text/javascript" defer></script>
+  <script src="curve.js" type="text/javascript" defer></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div id="setupInfo">
+    <div id="nomiDiv">
+      <label for="nominator" class="nomi">čitateľ</label>
+      <input type="text" name="nominator" class="nomi" id="nomiInput" value="1">
+      <p class="nomi"> počet koľko mame dielov</p>
+    </div>
+    <section class="filler"></section>
+    <div id="denoDiv">
+      <label for="denominator" class="deno">menovateľ</label>
+      <input type="text" name="denominator" class="deno" id="denoInput" value="2">
+      <p class="deno"> počet všetkých častí spolu</p>
+    </div>
+    <button id="submit">Spustiť</button>
+  </div>
+  <canvas id="canvas"></canvas>
+
+</body>
+
+</html>
