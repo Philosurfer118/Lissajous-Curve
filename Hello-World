@@ -1,191 +1,187 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    <title>Dropdown list example</title>
 
-  <title>Lissajous Table</title>
+     <style>
+          html {
+          box-sizing: border-box;
+        }
 
-  <style>
-  html {
-  box-sizing: border-box;
-}
+        body {
+            background: #000000;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            margin: auto;
+            float: left;
+        }
 
-body {
-    background: #000000;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    margin: auto;
-    float: left;
-}
+        canvas {
+            background: #000000;
+            display: block;
+            margin: auto;
+            z-index: 0;
+        }
 
-canvas {
-    background: #000000;
-    display: block;
-    margin: auto;
-    z-index: 0;
-}
+        #setupInfo {
+          position: absolute;
+          margin-top: 15px;
+          margin-left: 15px;
+          z-index: 1;
+          width: fit-content;
+          height: fit-content;
+          padding: 5px;
 
-#setupInfo {
-  position: absolute;
-  margin-top: 15px;
-  margin-left: 15px;
-  z-index: 1;
-  width: fit-content;
-  height: fit-content;
-  padding: 5px;
+          display: flex;
+          flex-flow: column wrap;
+        }
 
-  display: flex;
-  flex-flow: column wrap;
-}
+        #setupInfo label {
+          display: inline-block;
+          font-family: 'Sanchez', serif;
+          text-align: center;
+          color: #f5f5f5;
+          width: 100px;
+        }
 
-#setupInfo label {
-  display: inline-block;
-  font-family: 'Sanchez', serif;
-  text-align: center;
-  color: #f5f5f5;
-  width: 100px;
-}
+        #setupInfo input {
+          display: inline-block;
+          margin-left: 5px;
+          margin-right: 5px;
+          width: 30px;
+          text-align: center;
+        }
 
-#setupInfo input {
-  display: inline-block;
-  margin-left: 5px;
-  margin-right: 5px;
-  width: 30px;
-  text-align: center;
-}
+        #setupInfo p {
+          display: inline;
+          text-align: left;
+          font-family: 'Raleway', sans-serif;
+          color: #f5f5f5;
+        }
 
-#setupInfo p {
-  display: inline;
-  text-align: left;
-  font-family: 'Raleway', sans-serif;
-  color: #f5f5f5;
-}
+        #content-buttons {
+          display: flex;
+          flex: row wrap;
+          width: 380px;
+          padding: 0;
+          margin-top: 5px;
 
-#content-buttons {
-  display: flex;
-  flex: row wrap;
-  width: 380px;
-  padding: 0;
-  margin-top: 5px;
+          justify-content: space-between !important;
+          align-items: center !important;
+        }
 
-  justify-content: space-between !important;
-  align-items: center !important;
-}
+        .filler {
+          height: 5px;
+          border-radius: 3px;
+          margin-top: 5px;
+          margin-bottom: 5px;
+          background-color: snow;
+        }
 
-.filler {
-  height: 5px;
-  border-radius: 3px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  background-color: snow;
-}
+        button {
+          width: 120px;
+          height: 40px;
+          align-self: left;
+          background: #333333;
+          border: 3px solid #222222;
+          border-radius: 8px;
+          font-family: 'Sanchez', serif;
+          font-size: 16pt;
+          color: #ffffff;
+          cursor: pointer;
+          outline: none;
+        }
 
-button {
-  width: 120px;
-  height: 40px;
-  align-self: left;
-  background: #333333;
-  border: 3px solid #222222;
-  border-radius: 8px;
-  font-family: 'Sanchez', serif;
-  font-size: 16pt;
-  color: #ffffff;
-  cursor: pointer;
-  outline: none;
-}
+        button:hover {
+          background: #5a5a5a;
+        }
 
-button:hover {
-  background: #5a5a5a;
-}
+        button:active {
+          background: #6a6a6a;
+          color: #f5f5f5;
+        }
 
-button:active {
-  background: #6a6a6a;
-  color: #f5f5f5;
-}
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          left: 5px;
+          background-color: #9999993a;
+          color: #f5f5f5;
+          font-family: 'Raleway', sans-serif;
+          border-radius: 8px;
+          z-index: 1;
+          padding: 15px;
+        }
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  left: 5px;
-  background-color: #9999993a;
-  color: #f5f5f5;
-  font-family: 'Raleway', sans-serif;
-  border-radius: 8px;
-  z-index: 1;
-  padding: 15px;
-}
+        .dropdown-content h4 {
+        margin: 0px 0px 5px 5px;
+        }
 
-.dropdown-content h4 {
-margin: 0px 0px 5px 5px;
-}
+        .dropdown-content ol {
+          padding-left: 10px;
+          margin: 5px 10px 5px;
+          height: fit-content;
+        }
 
-.dropdown-content ol {
-  padding-left: 10px;
-  margin: 5px 10px 5px;
-  height: fit-content;
-}
 
-#dropdown-para {
-  height: fit-content;
-  width: fit-content;
-}
-#dropdown-para p::first-line {
-  text-transform: capitalize;
-}
+        #dropdown-para {
+          height: fit-content;
+          width: fit-content;
+        }
+        #dropdown-para p::first-line {
+          text-transform: capitalize;
+        }
 
-.drp-content-list {
-  width: max-content;
-  height: fit-content;
-  margin-top: 5px;
-  margin-bottom: 10px;
-  padding-left: 0px;
-  list-style-type: none;
-}
+        .drp-content-list {
+          width: max-content;
+          height: fit-content;
+          margin-top: 5px;
+          margin-bottom: 10px;
+          padding-left: 0px;
+          list-style-type: none;
+        }
 
-.drp-content label {
-  margin-left: 0px !important;
-  padding: 0px !important;
-  width: 15px !important;
-}
+        .drp-content label {
+          margin-left: 0px !important;
+          padding: 0px !important;
+          width: 15px !important;
+        }
 
-.dropdown {
-  width: 120px;
-  height: 40px;
-}
+        .dropdown {
+          width: 120px;
+          height: 40px;
+        }
 
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-  display: block;
-  min-width: 400px;
-  height: min-content;
-}
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+          display: block;
+          min-width: 400px;
+          height: min-content;
+        }
 
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropbtn:hover .dropbtn {
-  background: #6a6a6a;
-  color: #f5f5f5;
-}
-  </style>
-
-  <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+        /* Change the background color of the dropdown button when the dropdown content is shown */
+        .dropbtn:hover .dropbtn {
+          background: #6a6a6a;
+          color: #f5f5f5;
+        }
+	</style>
+    <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet"></link>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet"></link>
 </head>
-
 <body>
       <div id="setupInfo">
     <div id="nomiDiv">
       <label for="nominator" class="nomi">čitateľ</label>
-      <input type="text" name="nominator" class="nomi" id="nomiInput" value="1">
+      <input type="text" name="nominator" class="nomi" id="nomiInput" value="1"></input>
       <p class="nomi"> počet koľko mame dielov</p>
     </div>
     <section class="filler"></section>
     <div id="denoDiv">
       <label for="denominator" class="deno">menovateľ</label>
-      <input type="text" name="denominator" class="deno" id="denoInput" value="2">
+      <input type="text" name="denominator" class="deno" id="denoInput" value="2"></input>
       <p class="deno"> počet všetkých častí spolu</p>
     </div>
     <section id="content-buttons">
@@ -201,11 +197,11 @@ margin: 0px 0px 5px 5px;
                 </ul>
                 <ul class="drp-content-list">
                   <li class="drp-content">
-                    <input type="checkbox" name="color" id="color" value="color" checked>
+                    <input type="checkbox" name="color" id="color" value="color" checked></input>
                     <label for="color">Farebnosť</label>
                   </li>
                   <li class="drp-content">
-                    <input type="checkbox" name="rules" id="rules" value="rules" checked>
+                    <input type="checkbox" name="rules" id="rules" value="rules" checked></input>
                     <label for="rules">Obmedzenie</label> 
                   </li>
                 </ul>
@@ -215,13 +211,13 @@ margin: 0px 0px 5px 5px;
                     </p>
                 </div>
         </div>
+       </div>
     </section>
-    </div>
   </div>
   <canvas id="canvas"></canvas>
 </body>
 
- <script type="text/javascript" defer>
+<script type="text/javascript">
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
     const setupInfo = document.getElementById('setupInfo');
@@ -239,113 +235,113 @@ margin: 0px 0px 5px 5px;
         let y = Math.floor(document.documentElement.clientHeight);
 
         if ( y < x ) {
-            canvas.width = y;
-            canvas.height = y;
-        } else {
-            canvas.width = x;
-            canvas.height = x;
+                canvas.width = y;
+                canvas.height = y;
+            } else {
+                canvas.width = x;
+                canvas.height = x;
         };
     };
 
-    window.addEventListener('load',init);
+window.addEventListener('load',init);
 
-    const nomi = document.getElementById('nomiInput');
-    const deno = document.getElementById('denoInput');
-    let lisaCurve;
+const nomi = document.getElementById('nomiInput');
+const deno = document.getElementById('denoInput');
+let lisaCurve;
 
-    function animation() {
-        let colorBox = document.getElementById('color').checked;
-        let rulesBox = document.getElementById('rules').checked;
+function animation() {
+  let colorBox = document.getElementById('color').checked;
+  let rulesBox = document.getElementById('rules').checked;
 
-        let canWid = canvas.width;
-        let canHig = canvas.height;
-        let r = (canWid/4) - 25;
-    //    let stpHig = setupInfo.height;
+  let canWid = canvas.width;
+  let canHig = canvas.height;
+  let r = (canWid/4) - 25;
+//    let stpHig = setupInfo.height;
+  
+  let nom = new Ellipse(r, (canWid/4)*3,canHig/4);
+  let nomSpeed = Number(nomi.value);
 
-        let nom = new Ellipse(r, (canWid/4)*3,canHig/4);
-        let nomSpeed = Number(nomi.value);
+  let dom = new Ellipse(r,canWid/4,(canHig/4)*3);
+  let domSpeed = Number(deno.value);
 
-        let dom = new Ellipse(r,canWid/4,(canHig/4)*3);
-        let domSpeed = Number(deno.value);
+  const lisa = new LissaCurve();
+  lisaCurve = lisa;
 
-        const lisa = new LissaCurve();
-        lisaCurve = lisa;
+  if (colorBox == true) {
+      lisa.addColor();
+  } else {
+      lisa.current.r = 255;
+      lisa.current.g = 255;
+      lisa.current.b = 255;
+  }
 
-        if (colorBox == true) {
-            lisa.addColor();
-        } else {
-            lisa.current.r = 255;
-            lisa.current.g = 255;
-            lisa.current.b = 255;
-        }
+  let angle = 0;
 
-        let angle = 0;
+  if (isNaN(domSpeed) || isNaN(nomSpeed)) {
+      throw window.alert('zadajte len čísla');
+      };
 
-        if (isNaN(domSpeed) || isNaN(nomSpeed)) {
-            throw window.alert('zadajte len čísla');
-            };
+  if (rulesBox == true) {
+      if ((nomSpeed > 101)||(nomSpeed < 1)) {
+          throw window.alert('zadajte len čísla od 1 do 101');
+      };
+      if ((domSpeed > 101)||(domSpeed < 1)) {
+          throw window.alert('zadajte len čísla od 1 do 101');
+      };
+  }
 
-        if (rulesBox == true) {
-            if ((nomSpeed > 101)||(nomSpeed < 1)) {
-                throw window.alert('zadajte len čísla od 1 do 101');
-            };
-            if ((domSpeed > 101)||(domSpeed < 1)) {
-                throw window.alert('zadajte len čísla od 1 do 101');
-            };
-        }
+  function draw() {
+      ctx.fillStyle = 'rgba(0,0,0,0.7)';
+      ctx.fillRect(0,0,canWid,canHig); // nom
 
-        function draw() {
-            ctx.fillStyle = 'rgba(0,0,0,0.7)';
-            ctx.fillRect(0,0,canWid,canHig); // nom
+      nom.drawEllipse();
+      (nomSpeed > 200 ? nomSpeed : nom.drawLineY(canHig));
+      (nomSpeed > 200 ? nomSpeed : nom.addPoint());
+      nom.updatePoint(angle,nomSpeed);
+      lisa.setX(nom.point.x);
 
-            nom.drawEllipse();
-            (nomSpeed > 200 ? nomSpeed : nom.drawLineY(canHig));
-            (nomSpeed > 200 ? nomSpeed : nom.addPoint());
-            nom.updatePoint(angle,nomSpeed);
-            lisa.setX(nom.point.x);
+      dom.drawEllipse();
+      (domSpeed > 200 ? domSpeed : dom.drawLineX(canWid));
+      (domSpeed > 200 ? domSpeed : dom.addPoint());
+      dom.updatePoint(angle,domSpeed);
+      lisa.setY(dom.point.y);
 
-            dom.drawEllipse();
-            (domSpeed > 200 ? domSpeed : dom.drawLineX(canWid));
-            (domSpeed > 200 ? domSpeed : dom.addPoint());
-            dom.updatePoint(angle,domSpeed);
-            lisa.setY(dom.point.y);
+      if (repeat == 100) {
+          lisa.drawCurve();
+      } else {
+          if ((repeat !== Math.floor(angle)) && (repeat < 100) && (colorBox == true)) {
+              lisa.setColor()
+              repeat += 1;
+          }
+          lisa.addPoint();
+          lisa.drawCurve();
+      }
 
-            if (repeat == 100) {
-                lisa.drawCurve();
-            } else {
-                if ((repeat !== Math.floor(angle)) && (repeat < 100) && (colorBox == true)) {
-                    lisa.setColor()
-                    repeat += 1;
-                }
-                lisa.addPoint();
-                lisa.drawCurve();
-            }
+      if (angle > Math.PI * 2) {
+          angle = 0;
+          repeat = 100
+      } else {
+          angle += 0.001;
+      };
+  };
 
-            if (angle > Math.PI * 2) {
-                angle = 0;
-                repeat = 100
-            } else {
-                angle += 0.001;
-            };
-        };
+  repeat = 0;
+  window.clearInterval(interval);
+  interval = window.setInterval(draw,10);
+}
 
-        repeat = 0;
-        window.clearInterval(interval);
-        interval = window.setInterval(draw,10);
-    }
+function resetCanvas() {
+  repeat = 0;
+  clearInterval(interval);
+  init();
+}
 
-    function resetCanvas() {
-        repeat = 0;
-        clearInterval(interval);
-        init();
-    }
-
-    function finalCanvas() {
-        repeat = 0;
-        clearInterval(interval);
-        init();
-        lisaCurve.drawFinal();
-    }
+function finalCanvas() {
+  repeat = 0;
+  clearInterval(interval);
+  init();
+  lisaCurve.drawFinal();
+}
 
     nomi.focus();
     submitButton.addEventListener('click',animation);
@@ -353,222 +349,219 @@ margin: 0px 0px 5px 5px;
     window.addEventListener('resize',resetCanvas);
     nomi.addEventListener('change',resetCanvas);
     deno.addEventListener('change',resetCanvas);
-  </script>
-  
-  <script type="text/javascript" defer>
+</script>
+  <script type="text/javascript">
   // see fraction.js for canvas and ctx, and other values
+class Ellipse {
+  constructor(r, cx, cy) {
+      this.r = r
+      this.cx = cx;
+      this.cy = cy;
+      this.point = {
+          x : r + cx,
+          y : cy
+      }
+  }
 
-    class Ellipse {
-        constructor(r, cx, cy) {
-            this.r = r
-            this.cx = cx;
-            this.cy = cy;
-            this.point = {
-                x : r + cx,
-                y : cy
-            }
-        }
+  drawEllipse() {
+      ctx.beginPath();
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'rgb(255,255,255)';
+      ctx.arc(this.cx,this.cy,this.r, 0, Math.PI * 2, false);
+      ctx.stroke();
+  }
 
-        drawEllipse() {
-            ctx.beginPath();
-            ctx.lineWidth = 1;
-            ctx.strokeStyle = 'rgb(255,255,255)';
-            ctx.arc(this.cx,this.cy,this.r, 0, Math.PI * 2, false);
-            ctx.stroke();
-        }
+  movePoint() {
+      this.point.x = this.cx;
+      this.point.y = this.cy + this.r;
+  }
 
-        movePoint() {
-            this.point.x = this.cx;
-            this.point.y = this.cy + this.r;
-        }
+  addPoint() {
+      ctx.beginPath();
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'rgb(255,255,255)';
+      ctx.fillStyle =  'rgb(0,0,0)';
+      ctx.arc(this.point.x, this.point.y,5, 0, Math.PI * 2, false);
+      ctx.fill();
+      ctx.stroke();
+  }
 
-        addPoint() {
-            ctx.beginPath();
-            ctx.lineWidth = 1;
-            ctx.strokeStyle = 'rgb(255,255,255)';
-            ctx.fillStyle =  'rgb(0,0,0)';
-            ctx.arc(this.point.x, this.point.y,5, 0, Math.PI * 2, false);
-            ctx.fill();
-            ctx.stroke();
-        }
+  updatePoint(angle = 0,speed = 1) {
+      if(speed < 1) {speed = 1; window.alert('speed cannot be smaller than 1')}
+      this.point.x = this.cx + Math.floor(this.r * Math.cos(angle * speed));
+      this.point.y = this.cy + Math.floor(this.r * Math.sin(angle * speed));
+  }
 
-        updatePoint(angle = 0,speed = 1) {
-            if(speed < 1) {speed = 1; window.alert('speed cannot be smaller than 1')}
-            this.point.x = this.cx + Math.floor(this.r * Math.cos(angle * speed));
-            this.point.y = this.cy + Math.floor(this.r * Math.sin(angle * speed));
-        }
+  updateMovedPoint(angle = 0,speed = 1) {
+      if(speed < 1) {speed = 1; window.alert('speed cannot be smaller than 1')}
+      this.point.x = this.cx + Math.floor(this.r * Math.cos(angle * speed));
+      this.point.y = this.cy + Math.floor(this.r * Math.sin(angle * speed));
+  }
 
-        updateMovedPoint(angle = 0,speed = 1) {
-            if(speed < 1) {speed = 1; window.alert('speed cannot be smaller than 1')}
-            this.point.x = this.cx + Math.floor(this.r * Math.cos(angle * speed));
-            this.point.y = this.cy + Math.floor(this.r * Math.sin(angle * speed));
-        }
+  drawLineY(y) {
+      ctx.beginPath();
+      ctx.moveTo(this.point.x,this.point.y);
+      ctx.lineTo(this.point.x,y);
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+      ctx.closePath();
+      ctx.stroke()
+  }
 
-        drawLineY(y) {
-            ctx.beginPath();
-            ctx.moveTo(this.point.x,this.point.y);
-            ctx.lineTo(this.point.x,y);
-            ctx.lineWidth = 1;
-            ctx.strokeStyle = 'rgba(255,255,255,0.5)';
-            ctx.closePath();
-            ctx.stroke()
-        }
+  drawLineX(x) {
+      ctx.beginPath();
+      ctx.moveTo(this.point.x,this.point.y);
+      ctx.lineTo(x,this.point.y);
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+      ctx.closePath();
+      ctx.stroke()
+  }
+}
 
-        drawLineX(x) {
-            ctx.beginPath();
-            ctx.moveTo(this.point.x,this.point.y);
-            ctx.lineTo(x,this.point.y);
-            ctx.lineWidth = 1;
-            ctx.strokeStyle = 'rgba(255,255,255,0.5)';
-            ctx.closePath();
-            ctx.stroke()
-        }
-    }
+class Vector {
+  constructor() {
+      this.x;
+      this.y;
+      this.r;
+      this.g;
+      this.b;
+  }
 
-    class Vector {
-        constructor() {
-            this.x;
-            this.y;
-            this.r;
-            this.g;
-            this.b;
-        }
+}
 
-    }
+class LissaCurve {
+  constructor() {
+      this.path = [];
+      this.current = new Vector();
+  }
 
-    class LissaCurve {
-        constructor() {
-            this.path = [];
-            this.current = new Vector();
-        }
+  setX(x) {
+      return this.current.x = x;
+  }
 
-        setX(x) {
-            return this.current.x = x;
-        }
+  setY(y) {
+      return this.current.y = y;
+  }
 
-        setY(y) {
-            return this.current.y = y;
-        }
+  addPoint() {
+      this.path.push(this.current);
+      this.current = new Vector();
+      this.current.r = this.path[0].r;
+      this.current.g = this.path[0].g;
+      this.current.b = this.path[0].b;
+  }
 
-        addPoint() {
-            this.path.push(this.current);
-            this.current = new Vector();
-            this.current.r = this.path[0].r;
-            this.current.g = this.path[0].g;
-            this.current.b = this.path[0].b;
-        }
+  addColor() {
+      this.current.r = Math.floor(Math.random()*(255 - 1) + 1);
+      this.current.g = Math.floor(Math.random()*(255 - 1) + 1);
+      this.current.b = Math.floor(Math.random()*(255 - 1) + 1);
+  }
 
-        addColor() {
-            this.current.r = Math.floor(Math.random()*(255 - 1) + 1);
-            this.current.g = Math.floor(Math.random()*(255 - 1) + 1);
-            this.current.b = Math.floor(Math.random()*(255 - 1) + 1);
-        }
+  setColor() {
+      let maxim = Math.max(this.path[0].r, this.path[0].g, this.path[0].b);
+      let minim = Math.min(this.path[0].r, this.path[0].g, this.path[0].b);7
+      let color = Math.floor(Math.random()*49+1);
 
-        setColor() {
-            let maxim = Math.max(this.path[0].r, this.path[0].g, this.path[0].b);
-            let minim = Math.min(this.path[0].r, this.path[0].g, this.path[0].b);7
-            let color = Math.floor(Math.random()*49+1);
+      switch (this.path[0].r) {
+          case maxim:
+             (color % 2 == 0 ? this.path[0].r += color : this.path[0].r -= color);
+          break; 
+          case minim:
+              (color % 3 == 0 ? this.path[0].r -= color : this.path[0].r += color);
+          break;
+          }
+      if (this.path[0].r > 255) {
+          this.path[0].r -= 255
+      } else if (this.path[0].r < 0) {
+          this.path[0].r += 255
+      } else {
+          this.path[0].r
+      }
 
-            switch (this.path[0].r) {
-                case maxim:
-                   (color % 2 == 0 ? this.path[0].r += color : this.path[0].r -= color);
-                break; 
-                case minim:
-                    (color % 3 == 0 ? this.path[0].r -= color : this.path[0].r += color);
-                break;
-                }
-            if (this.path[0].r > 255) {
-                this.path[0].r -= 255
-            } else if (this.path[0].r < 0) {
-                this.path[0].r += 255
-            } else {
-                this.path[0].r
-            }
+      switch (this.path[0].g) {
+          case maxim:
+             (color % 2 == 0 ? this.path[0].g += color : this.path[0].g -= color);
+          break; 
+          case minim:
+              (color % 3 == 0 ? this.path[0].g -= color : this.path[0].g += color);
+          break;
+          }
+      if (this.path[0].g > 255) {
+          this.path[0].g -= 255
+      } else if (this.path[0].g < 0) {
+          this.path[0].g += 255
+      } else {
+          this.path[0].g
+      }
 
-            switch (this.path[0].g) {
-                case maxim:
-                   (color % 2 == 0 ? this.path[0].g += color : this.path[0].g -= color);
-                break; 
-                case minim:
-                    (color % 3 == 0 ? this.path[0].g -= color : this.path[0].g += color);
-                break;
-                }
-            if (this.path[0].g > 255) {
-                this.path[0].g -= 255
-            } else if (this.path[0].g < 0) {
-                this.path[0].g += 255
-            } else {
-                this.path[0].g
-            }
+      switch (this.path[0].b) {
+          case maxim:
+             (color % 2 == 0 ? this.path[0].b += color : this.path[0].b -= color);
+          break; 
+          case minim:
+              (color % 3 == 0 ? this.path[0].b -= color : this.path[0].b += color);
+          break;
+          }
+      if (this.path[0].b > 255) {
+          this.path[0].b -= 255
+      } else if (this.path[0].b < 0) {
+          this.path[0].b += 255
+      } else {
+          this.path[0].b
+      }
 
-            switch (this.path[0].b) {
-                case maxim:
-                   (color % 2 == 0 ? this.path[0].b += color : this.path[0].b -= color);
-                break; 
-                case minim:
-                    (color % 3 == 0 ? this.path[0].b -= color : this.path[0].b += color);
-                break;
-                }
-            if (this.path[0].b > 255) {
-                this.path[0].b -= 255
-            } else if (this.path[0].b < 0) {
-                this.path[0].b += 255
-            } else {
-                this.path[0].b
-            }
+      return [this.path[0].r, this.path[0].g, this.path[0].b]
+  }
 
-            return [this.path[0].r, this.path[0].g, this.path[0].b]
-        }
+  drawCurve() {
+      for (let i = 0; i < this.path.length; i++){
 
-        drawCurve() {
-            for (let i = 0; i < this.path.length; i++){
+          ctx.strokeStyle = `
+          rgb(${this.path[i].r},
+              ${this.path[i].g},
+              ${this.path[i].b})`;
 
-                ctx.strokeStyle = `
-                rgb(${this.path[i].r},
-                    ${this.path[i].g},
-                    ${this.path[i].b})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
 
-                ctx.lineWidth = 1;
-                ctx.beginPath();
+          try {
+              ctx.moveTo(this.path[i].x,this.path[i].y);
+              ctx.lineTo(this.path[i-1].x,this.path[i-1].y);
+          }
+          catch {
+              ctx.moveTo(this.path[i].x,this.path[i].y);
+              ctx.lineTo(this.path[i].x,this.path[i].y);
+          }
 
-                try {
-                    ctx.moveTo(this.path[i].x,this.path[i].y);
-                    ctx.lineTo(this.path[i-1].x,this.path[i-1].y);
-                }
-                catch {
-                    ctx.moveTo(this.path[i].x,this.path[i].y);
-                    ctx.lineTo(this.path[i].x,this.path[i].y);
-                }
+          ctx.closePath();
+          ctx.stroke();
+      }
+  }
 
-                ctx.closePath();
-                ctx.stroke();
-            }
-        }
+  drawFinal() {
+      for (let i = 0; i < this.path.length; i++){
 
-        drawFinal() {
-            for (let i = 0; i < this.path.length; i++){
+          ctx.strokeStyle = `
+          rgb(${this.path[i].r},
+              ${this.path[i].g},
+              ${this.path[i].b})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
 
-                ctx.strokeStyle = `
-                rgb(${this.path[i].r},
-                    ${this.path[i].g},
-                    ${this.path[i].b})`;
-                ctx.lineWidth = 1;
-                ctx.beginPath();
+          try {
+              ctx.moveTo(this.path[i].x,this.path[i].y);
+              ctx.lineTo(this.path[i-1].x,this.path[i-1].y);
+          }
+          catch {
+              ctx.moveTo(this.path[i].x,this.path[i].y);
+              ctx.lineTo(this.path[i].x,this.path[i].y);
+          }
 
-                try {
-                    ctx.moveTo(this.path[i].x,this.path[i].y);
-                    ctx.lineTo(this.path[i-1].x,this.path[i-1].y);
-                }
-                catch {
-                    ctx.moveTo(this.path[i].x,this.path[i].y);
-                    ctx.lineTo(this.path[i].x,this.path[i].y);
-                }
-
-                ctx.closePath();
-                ctx.stroke();
-            }
-        }
-    }
+          ctx.closePath();
+          ctx.stroke();
+      }
+  }
+}
   </script>
-
 </html>
