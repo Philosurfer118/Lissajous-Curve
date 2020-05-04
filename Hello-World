@@ -129,7 +129,6 @@ margin: 0px 0px 5px 5px;
   height: fit-content;
 }
 
-
 #dropdown-para {
   height: fit-content;
   width: fit-content;
@@ -177,7 +176,7 @@ margin: 0px 0px 5px 5px;
 </head>
 
 <body>
-  <div id="setupInfo">
+      <div id="setupInfo">
     <div id="nomiDiv">
       <label for="nominator" class="nomi">čitateľ</label>
       <input type="text" name="nominator" class="nomi" id="nomiInput" value="1">
@@ -189,7 +188,35 @@ margin: 0px 0px 5px 5px;
       <input type="text" name="denominator" class="deno" id="denoInput" value="2">
       <p class="deno"> počet všetkých častí spolu</p>
     </div>
-    <button id="submit">Spustiť</button>
+    <section id="content-buttons">
+        <button type="submit" id="submit">Spustiť</button>
+        <button type="submit" id="final">Final</button>
+        <div class="dropdown">
+            <button class="dropbtn">Menu</button>
+            <div class="dropdown-content">
+                <ul class="drp-content-list">
+                  <h4>Inštrukcie:</h4>
+                    <li> <b>Spustiť</b> - rozbieha animaciu</li>
+                    <li> <b>Final</b> - nakreslí krivku v momente keď bola dokončená</li>
+                </ul>
+                <ul class="drp-content-list">
+                  <li class="drp-content">
+                    <input type="checkbox" name="color" id="color" value="color" checked>
+                    <label for="color">Farebnosť</label>
+                  </li>
+                  <li class="drp-content">
+                    <input type="checkbox" name="rules" id="rules" value="rules" checked>
+                    <label for="rules">Obmedzenie</label> 
+                  </li>
+                </ul>
+                <div id="dropdown-para">
+                    <p >
+                        Toto je cvičenie na zlomky v ktorom je možné vidieť ako rôzne čísla spolu vytvoria nečakané tvary. Hlavné je, že o číslach môžeme rozmýšlať aj v iných hodnotách, ako len v dielikoch. Zaujmavé je hlavne použiť a experimentovať s prvočíslami a zlomkami, ktoré vieme vďaka nim vyjadriť, napr. (37/79,101/).
+                    </p>
+                </div>
+        </div>
+    </section>
+    </div>
   </div>
   <canvas id="canvas"></canvas>
 </body>
