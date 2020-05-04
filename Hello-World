@@ -8,7 +8,193 @@
 
   <title>Lissajous Table</title>
 
-  <script type="text/javascript" defer>
+  <style>
+  html {
+  box-sizing: border-box;
+}
+
+body {
+    background: #000000;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    margin: auto;
+    float: left;
+}
+
+canvas {
+    background: #000000;
+    display: block;
+    margin: auto;
+    z-index: 0;
+}
+
+#setupInfo {
+  position: absolute;
+  margin-top: 15px;
+  margin-left: 15px;
+  z-index: 1;
+  width: fit-content;
+  height: fit-content;
+  padding: 5px;
+
+  display: flex;
+  flex-flow: column wrap;
+}
+
+#setupInfo label {
+  display: inline-block;
+  font-family: 'Sanchez', serif;
+  text-align: center;
+  color: #f5f5f5;
+  width: 100px;
+}
+
+#setupInfo input {
+  display: inline-block;
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 30px;
+  text-align: center;
+}
+
+#setupInfo p {
+  display: inline;
+  text-align: left;
+  font-family: 'Raleway', sans-serif;
+  color: #f5f5f5;
+}
+
+#content-buttons {
+  display: flex;
+  flex: row wrap;
+  width: 380px;
+  padding: 0;
+  margin-top: 5px;
+
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.filler {
+  height: 5px;
+  border-radius: 3px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: snow;
+}
+
+button {
+  width: 120px;
+  height: 40px;
+  align-self: left;
+  background: #333333;
+  border: 3px solid #222222;
+  border-radius: 8px;
+  font-family: 'Sanchez', serif;
+  font-size: 16pt;
+  color: #ffffff;
+  cursor: pointer;
+  outline: none;
+}
+
+button:hover {
+  background: #5a5a5a;
+}
+
+button:active {
+  background: #6a6a6a;
+  color: #f5f5f5;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  left: 5px;
+  background-color: #9999993a;
+  color: #f5f5f5;
+  font-family: 'Raleway', sans-serif;
+  border-radius: 8px;
+  z-index: 1;
+  padding: 15px;
+}
+
+.dropdown-content h4 {
+margin: 0px 0px 5px 5px;
+}
+
+.dropdown-content ol {
+  padding-left: 10px;
+  margin: 5px 10px 5px;
+  height: fit-content;
+}
+
+
+#dropdown-para {
+  height: fit-content;
+  width: fit-content;
+}
+#dropdown-para p::first-line {
+  text-transform: capitalize;
+}
+
+.drp-content-list {
+  width: max-content;
+  height: fit-content;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  padding-left: 0px;
+  list-style-type: none;
+}
+
+.drp-content label {
+  margin-left: 0px !important;
+  padding: 0px !important;
+  width: 15px !important;
+}
+
+.dropdown {
+  width: 120px;
+  height: 40px;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+  min-width: 400px;
+  height: min-content;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropbtn:hover .dropbtn {
+  background: #6a6a6a;
+  color: #f5f5f5;
+}
+  </style>
+
+  <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div id="setupInfo">
+    <div id="nomiDiv">
+      <label for="nominator" class="nomi">čitateľ</label>
+      <input type="text" name="nominator" class="nomi" id="nomiInput" value="1">
+      <p class="nomi"> počet koľko mame dielov</p>
+    </div>
+    <section class="filler"></section>
+    <div id="denoDiv">
+      <label for="denominator" class="deno">menovateľ</label>
+      <input type="text" name="denominator" class="deno" id="denoInput" value="2">
+      <p class="deno"> počet všetkých častí spolu</p>
+    </div>
+    <button id="submit">Spustiť</button>
+  </div>
+  <canvas id="canvas"></canvas>
+</body>
+
+ <script type="text/javascript" defer>
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
     const setupInfo = document.getElementById('setupInfo');
@@ -357,194 +543,5 @@
         }
     }
   </script>
-
-  <style>
-  html {
-  box-sizing: border-box;
-}
-
-body {
-    background: #000000;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    margin: auto;
-    float: left;
-}
-
-canvas {
-    background: #000000;
-    display: block;
-    margin: auto;
-    z-index: 0;
-}
-
-#setupInfo {
-  position: absolute;
-  margin-top: 15px;
-  margin-left: 15px;
-  z-index: 1;
-  width: fit-content;
-  height: fit-content;
-  padding: 5px;
-
-  display: flex;
-  flex-flow: column wrap;
-}
-
-#setupInfo label {
-  display: inline-block;
-  font-family: 'Sanchez', serif;
-  text-align: center;
-  color: #f5f5f5;
-  width: 100px;
-}
-
-#setupInfo input {
-  display: inline-block;
-  margin-left: 5px;
-  margin-right: 5px;
-  width: 30px;
-  text-align: center;
-}
-
-#setupInfo p {
-  display: inline;
-  text-align: left;
-  font-family: 'Raleway', sans-serif;
-  color: #f5f5f5;
-}
-
-#content-buttons {
-  display: flex;
-  flex: row wrap;
-  width: 380px;
-  padding: 0;
-  margin-top: 5px;
-
-  justify-content: space-between !important;
-  align-items: center !important;
-}
-
-.filler {
-  height: 5px;
-  border-radius: 3px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  background-color: snow;
-}
-
-button {
-  width: 120px;
-  height: 40px;
-  align-self: left;
-  background: #333333;
-  border: 3px solid #222222;
-  border-radius: 8px;
-  font-family: 'Sanchez', serif;
-  font-size: 16pt;
-  color: #ffffff;
-  cursor: pointer;
-  outline: none;
-}
-
-button:hover {
-  background: #5a5a5a;
-}
-
-button:active {
-  background: #6a6a6a;
-  color: #f5f5f5;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  left: 5px;
-  background-color: #9999993a;
-  color: #f5f5f5;
-  font-family: 'Raleway', sans-serif;
-  border-radius: 8px;
-  z-index: 1;
-  padding: 15px;
-}
-
-.dropdown-content h4 {
-margin: 0px 0px 5px 5px;
-}
-
-.dropdown-content ol {
-  padding-left: 10px;
-  margin: 5px 10px 5px;
-  height: fit-content;
-}
-
-
-#dropdown-para {
-  height: fit-content;
-  width: fit-content;
-}
-#dropdown-para p::first-line {
-  text-transform: capitalize;
-}
-
-.drp-content-list {
-  width: max-content;
-  height: fit-content;
-  margin-top: 5px;
-  margin-bottom: 10px;
-  padding-left: 0px;
-  list-style-type: none;
-}
-
-.drp-content label {
-  margin-left: 0px !important;
-  padding: 0px !important;
-  width: 15px !important;
-}
-
-.dropdown {
-  width: 120px;
-  height: 40px;
-}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-  display: block;
-  min-width: 400px;
-  height: min-content;
-}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropbtn:hover .dropbtn {
-  background: #6a6a6a;
-  color: #f5f5f5;
-}
-
-
-  </style>
-
-  <link href="https://fonts.googleapis.com/css?family=Sanchez&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
-</head>
-
-<body>
-  <div id="setupInfo">
-    <div id="nomiDiv">
-      <label for="nominator" class="nomi">čitateľ</label>
-      <input type="text" name="nominator" class="nomi" id="nomiInput" value="1">
-      <p class="nomi"> počet koľko mame dielov</p>
-    </div>
-    <section class="filler"></section>
-    <div id="denoDiv">
-      <label for="denominator" class="deno">menovateľ</label>
-      <input type="text" name="denominator" class="deno" id="denoInput" value="2">
-      <p class="deno"> počet všetkých častí spolu</p>
-    </div>
-    <button id="submit">Spustiť</button>
-  </div>
-  <canvas id="canvas"></canvas>
-
-</body>
 
 </html>
